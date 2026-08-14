@@ -105,11 +105,25 @@
   .hero-note{ font-size:0.85rem; color:#C9C3E8; }
 
   /* Logo strip */
-  .logo-strip{ background:var(--paper); padding:34px 32px; border-bottom:1px solid #ECEAF5; }
-  .logo-strip .wrap{ display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .logo-strip{ background:var(--paper); padding:34px 0; border-bottom:1px solid #ECEAF5; overflow:hidden; }
+  .logo-strip .wrap{ margin-bottom:22px; }
   .logo-strip .label{ font-size:0.82rem; color:var(--slate); font-weight:600; text-transform:uppercase; letter-spacing:0.06em; }
-  .logo-row{ display:flex; gap:36px; flex-wrap:wrap; align-items:center; }
-  .logo-chip{ font-family:'Space Grotesk',sans-serif; font-weight:600; color:#B7B3CC; font-size:1.05rem; }
+  .logo-marquee{
+    position:relative; overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .logo-track{
+    display:flex; align-items:center; gap:64px; width:max-content;
+    animation:logo-scroll 22s linear infinite;
+  }
+  .logo-marquee:hover .logo-track{ animation-play-state:paused; }
+  .logo-chip{ font-family:'Space Grotesk',sans-serif; font-weight:600; color:#B7B3CC; font-size:1.05rem; white-space:nowrap; }
+  @keyframes logo-scroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){ .logo-track{ animation:none; } }
 
   /* Stats */
   .stats{ background:var(--ink); color:#fff; padding:64px 32px; }
@@ -225,12 +239,26 @@
 <div class="logo-strip">
   <div class="wrap">
     <span class="label">Placed talent at</span>
-    <div class="logo-row">
+  </div>
+  <div class="logo-marquee">
+    <div class="logo-track">
       <span class="logo-chip">Northline</span>
       <span class="logo-chip">Verdant Co.</span>
       <span class="logo-chip">Halcyon</span>
       <span class="logo-chip">Redwire</span>
       <span class="logo-chip">Ampersand</span>
+      <span class="logo-chip">Solstice Group</span>
+      <span class="logo-chip">Ironwood</span>
+      <span class="logo-chip">Basecamp Labs</span>
+      <!-- duplicate set — required for the seamless loop, keep identical to the set above -->
+      <span class="logo-chip" aria-hidden="true">Northline</span>
+      <span class="logo-chip" aria-hidden="true">Verdant Co.</span>
+      <span class="logo-chip" aria-hidden="true">Halcyon</span>
+      <span class="logo-chip" aria-hidden="true">Redwire</span>
+      <span class="logo-chip" aria-hidden="true">Ampersand</span>
+      <span class="logo-chip" aria-hidden="true">Solstice Group</span>
+      <span class="logo-chip" aria-hidden="true">Ironwood</span>
+      <span class="logo-chip" aria-hidden="true">Basecamp Labs</span>
     </div>
   </div>
 </div>
