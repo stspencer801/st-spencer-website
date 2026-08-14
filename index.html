@@ -78,6 +78,28 @@
     position:absolute; right:-80px; top:-60px; width:520px; height:520px;
     opacity:0.9; pointer-events:none;
   }
+  .fractal-shape .ring{
+    transform-box:fill-box; transform-origin:center;
+    animation:ring-pulse 7s ease-in-out infinite;
+  }
+  .fractal-shape .ring-outer{ animation-delay:0s; }
+  .fractal-shape .ring-mid{ animation-delay:-1.4s; }
+  .fractal-shape .ring-inner{ animation-delay:-2.8s; }
+  .fractal-shape .ring-dot{
+    transform-box:fill-box; transform-origin:center;
+    animation:dot-pulse 7s ease-in-out infinite; animation-delay:-2.8s;
+  }
+  @keyframes ring-pulse{
+    0%, 100%{ transform:scale(1); opacity:1; }
+    50%{ transform:scale(1.09); opacity:0.7; }
+  }
+  @keyframes dot-pulse{
+    0%, 100%{ transform:scale(1); }
+    50%{ transform:scale(1.25); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .fractal-shape .ring, .fractal-shape .ring-dot{ animation:none; }
+  }
   .hero-inner{ position:relative; max-width:1160px; margin:0 auto; }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
@@ -219,10 +241,10 @@
 
 <section class="hero">
   <svg class="fractal-shape" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="100,10 190,60 190,150 100,190 10,150 10,60" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-    <polygon points="100,40 165,75 165,135 100,165 35,135 35,75" fill="none" stroke="rgba(255,90,95,0.4)" stroke-width="1.5"/>
-    <polygon points="100,70 140,90 140,120 100,140 60,120 60,90" fill="none" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
-    <circle cx="100" cy="100" r="14" fill="rgba(255,255,255,0.9)"/>
+    <polygon class="ring ring-outer" points="100,10 190,60 190,150 100,190 10,150 10,60" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+    <polygon class="ring ring-mid" points="100,40 165,75 165,135 100,165 35,135 35,75" fill="none" stroke="rgba(255,90,95,0.4)" stroke-width="1.5"/>
+    <polygon class="ring ring-inner" points="100,70 140,90 140,120 100,140 60,120 60,90" fill="none" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+    <circle class="ring-dot" cx="100" cy="100" r="14" fill="rgba(255,255,255,0.9)"/>
   </svg>
   <div class="hero-inner">
     <span class="eyebrow">● Fractal Recruiting Consulting</span>
