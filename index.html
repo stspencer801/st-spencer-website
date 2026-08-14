@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ST Spencer — Homepage Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#4B2E9E;
+    --violet:#7C3AED;
+    --coral:#FF5A5F;
+    --teal:#14B8A6;
+    --ink:#14121F;
+    --slate:#6E6B80;
+    --cloud:#F7F6FB;
+    --paper:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    background:var(--cloud);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{ font-family:'Space Grotesk', sans-serif; letter-spacing:-0.01em;}
+  a{ text-decoration:none; color:inherit; }
+  img{max-width:100%; display:block;}
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 32px; }
+
+  /* Nav */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,18,31,0.92);
+    backdrop-filter:blur(6px);
+  }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:1160px; margin:0 auto; }
+  .brand{ color:#fff; font-weight:700; font-size:1.3rem; display:flex; align-items:center; gap:10px;}
+  .brand .mark{
+    width:26px;height:26px;border-radius:7px;
+    background:conic-gradient(from 210deg, var(--coral), var(--violet), var(--teal), var(--coral));
+  }
+  .nav-links{ display:flex; gap:32px; }
+  .nav-links a{ color:#D9D6E8; font-size:0.95rem; font-weight:500; transition:color .15s;}
+  .nav-links a:hover{ color:#fff; }
+  .cta-btn{
+    background:var(--coral); color:#fff; font-weight:600; font-size:0.92rem;
+    padding:11px 22px; border-radius:999px; border:none; cursor:pointer;
+    box-shadow:0 6px 18px rgba(255,90,95,0.35);
+    transition:transform .15s ease;
+  }
+  .cta-btn:hover{ transform:translateY(-1px); }
+  .cta-btn.ghost{
+    background:transparent; color:#fff; box-shadow:none;
+    border:1.5px solid rgba(255,255,255,0.35);
+  }
+  @media (max-width:860px){ .nav-links{ display:none; } }
+
+  /* Hero */
+  .hero{
+    position:relative; overflow:hidden;
+    background:linear-gradient(135deg, var(--indigo) 0%, var(--violet) 55%, #5B2E9E 100%);
+    color:#fff;
+    padding:110px 32px 130px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(255,90,95,0.35), transparent 40%),
+      radial-gradient(circle at 95% 65%, rgba(20,184,166,0.30), transparent 45%);
+    pointer-events:none;
+  }
+  .fractal-shape{
+    position:absolute; right:-80px; top:-60px; width:520px; height:520px;
+    opacity:0.9; pointer-events:none;
+  }
+  .hero-inner{ position:relative; max-width:1160px; margin:0 auto; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25);
+    padding:6px 14px; border-radius:999px; font-size:0.82rem; font-weight:600;
+    margin-bottom:26px; color:#F1EEFF;
+  }
+  .hero h1{
+    font-size:3.4rem; font-weight:700; max-width:680px; line-height:1.08;
+    margin-bottom:22px;
+  }
+  .hero h1 span{ color:var(--coral); }
+  .hero p.lead{
+    font-size:1.15rem; color:#E4E0F5; max-width:520px; margin-bottom:38px; font-weight:400;
+  }
+  .hero-ctas{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:56px; }
+  .btn-primary{
+    background:var(--coral); color:#fff; font-weight:600; padding:15px 28px;
+    border-radius:10px; font-size:1rem; box-shadow:0 10px 24px rgba(255,90,95,0.35);
+  }
+  .btn-secondary{
+    background:rgba(255,255,255,0.08); color:#fff; font-weight:600; padding:15px 28px;
+    border-radius:10px; font-size:1rem; border:1.5px solid rgba(255,255,255,0.35);
+  }
+  .hero-note{ font-size:0.85rem; color:#C9C3E8; }
+
+  /* Logo strip */
+  .logo-strip{ background:var(--paper); padding:34px 32px; border-bottom:1px solid #ECEAF5; }
+  .logo-strip .wrap{ display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .logo-strip .label{ font-size:0.82rem; color:var(--slate); font-weight:600; text-transform:uppercase; letter-spacing:0.06em; }
+  .logo-row{ display:flex; gap:36px; flex-wrap:wrap; align-items:center; }
+  .logo-chip{ font-family:'Space Grotesk',sans-serif; font-weight:600; color:#B7B3CC; font-size:1.05rem; }
+
+  /* Stats */
+  .stats{ background:var(--ink); color:#fff; padding:64px 32px; }
+  .stats .wrap{ display:grid; grid-template-columns:repeat(4,1fr); gap:32px; }
+  .stat h3{ font-size:2.6rem; font-weight:700; margin-bottom:6px; }
+  .stat:nth-child(1) h3{ color:var(--coral); }
+  .stat:nth-child(2) h3{ color:var(--teal); }
+  .stat:nth-child(3) h3{ color:#B48CFF; }
+  .stat:nth-child(4) h3{ color:var(--coral); }
+  .stat p{ color:#B9B5CC; font-size:0.92rem; }
+  @media (max-width:760px){ .stats .wrap{ grid-template-columns:repeat(2,1fr); } }
+
+  /* Section heading */
+  .section{ padding:96px 32px; }
+  .section-head{ max-width:600px; margin-bottom:56px; }
+  .kicker{ color:var(--coral); font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px; display:block; }
+  .section-head h2{ font-size:2.1rem; font-weight:700; margin-bottom:14px; }
+  .section-head p{ color:var(--slate); font-size:1.05rem; }
+
+  /* Cards */
+  .card-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .card{
+    background:var(--paper); border-radius:16px; padding:32px;
+    border:1px solid #ECEAF5; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 18px 40px rgba(75,46,158,0.12); }
+  .card .icon{
+    width:46px;height:46px;border-radius:12px; margin-bottom:20px;
+    display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+  }
+  .card:nth-child(1) .icon{ background:rgba(75,46,158,0.1); color:var(--indigo); }
+  .card:nth-child(2) .icon{ background:rgba(255,90,95,0.12); color:var(--coral); }
+  .card:nth-child(3) .icon{ background:rgba(20,184,166,0.12); color:var(--teal); }
+  .card:nth-child(4) .icon{ background:rgba(124,58,237,0.12); color:var(--violet); }
+  .card:nth-child(5) .icon{ background:rgba(75,46,158,0.1); color:var(--indigo); }
+  .card:nth-child(6) .icon{ background:rgba(255,90,95,0.12); color:var(--coral); }
+  .card h3{ font-size:1.15rem; margin-bottom:10px; }
+  .card p{ color:var(--slate); font-size:0.95rem; }
+  @media (max-width:900px){ .card-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:620px){ .card-grid{ grid-template-columns:1fr; } }
+
+  /* Process */
+  .process{ background:var(--paper); }
+  .process-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .step{ position:relative; padding-top:8px; }
+  .step .num{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.6rem;
+    color:transparent; -webkit-text-stroke:1.5px var(--violet); margin-bottom:16px; display:block;
+  }
+  .step h3{ font-size:1.05rem; margin-bottom:8px; }
+  .step p{ color:var(--slate); font-size:0.92rem; }
+
+  /* Testimonial */
+  .testimonial{
+    background:linear-gradient(120deg, var(--indigo), var(--violet));
+    color:#fff; padding:90px 32px; text-align:center; position:relative; overflow:hidden;
+  }
+  .testimonial blockquote{
+    font-family:'Space Grotesk',sans-serif; font-size:1.7rem; font-weight:600; max-width:760px; margin:0 auto 26px; line-height:1.35;
+  }
+  .testimonial cite{ font-style:normal; color:#D9D2FF; font-size:0.95rem; }
+
+  /* CTA banner */
+  .cta-banner{ background:var(--cloud); padding:100px 32px; text-align:center; }
+  .cta-banner h2{ font-size:2.3rem; margin-bottom:18px; }
+  .cta-banner p{ color:var(--slate); font-size:1.05rem; margin-bottom:34px; }
+  .cta-banner .hero-ctas{ justify-content:center; margin-bottom:0; }
+
+  /* Footer */
+  footer{ background:var(--ink); color:#B9B5CC; padding:56px 32px 32px; }
+  .footer-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px; margin-bottom:40px; }
+  .footer-grid h4{ color:#fff; font-size:0.85rem; margin-bottom:16px; text-transform:uppercase; letter-spacing:0.05em; }
+  .footer-grid a{ display:block; color:#B9B5CC; font-size:0.92rem; margin-bottom:10px; }
+  .footer-bottom{ border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; display:flex; justify-content:space-between; font-size:0.85rem; flex-wrap:wrap; gap:12px; }
+  @media (max-width:760px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav>
+    <div class="brand"><span class="mark"></span>ST Spencer</div>
+    <div class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">For Employers</a>
+      <a href="#">For Candidates</a>
+      <a href="#">Insights</a>
+      <a href="#">About</a>
+    </div>
+    <button class="cta-btn">Start a Search</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <svg class="fractal-shape" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="100,10 190,60 190,150 100,190 10,150 10,60" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+    <polygon points="100,40 165,75 165,135 100,165 35,135 35,75" fill="none" stroke="rgba(255,90,95,0.4)" stroke-width="1.5"/>
+    <polygon points="100,70 140,90 140,120 100,140 60,120 60,90" fill="none" stroke="rgba(20,184,166,0.5)" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="14" fill="rgba(255,255,255,0.9)"/>
+  </svg>
+  <div class="hero-inner">
+    <span class="eyebrow">● Fractal Recruiting Consulting</span>
+    <h1>The right hire has a <span>pattern</span>. We know how to find it.</h1>
+    <p class="lead">ST Spencer pairs deep search expertise with a sharper process — matching companies and candidates who actually fit, faster than a traditional search firm.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary">Hire Talent</a>
+      <a href="#" class="btn-secondary">Find Your Fit</a>
+    </div>
+    <div class="hero-note">Trusted by growth-stage companies and specialist teams nationwide</div>
+  </div>
+</section>
+
+<div class="logo-strip">
+  <div class="wrap">
+    <span class="label">Placed talent at</span>
+    <div class="logo-row">
+      <span class="logo-chip">Northline</span>
+      <span class="logo-chip">Verdant Co.</span>
+      <span class="logo-chip">Halcyon</span>
+      <span class="logo-chip">Redwire</span>
+      <span class="logo-chip">Ampersand</span>
+    </div>
+  </div>
+</div>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stat"><h3>240+</h3><p>Placements made</p></div>
+    <div class="stat"><h3>18 days</h3><p>Average time-to-fill</p></div>
+    <div class="stat"><h3>92%</h3><p>12-month retention rate</p></div>
+    <div class="stat"><h3>35+</h3><p>Industries served</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Specializations</span>
+      <h2>Search built around your function, not a generic pipeline</h2>
+      <p>Every engagement is staffed by consultants who work exclusively in that discipline — so the shortlist is right the first time.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card"><div class="icon">◆</div><h3>Executive Search</h3><p>C-suite and VP-level placements for growth-stage and established companies.</p></div>
+      <div class="card"><div class="icon">◆</div><h3>Technical & Engineering</h3><p>Specialized sourcing for hard-to-fill technical and product roles.</p></div>
+      <div class="card"><div class="icon">◆</div><h3>Sales & Revenue</h3><p>Quota-carrying and revenue-leadership hires with proven track records.</p></div>
+      <div class="card"><div class="icon">◆</div><h3>Fractional Leadership</h3><p>Part-time executive talent for companies that need expertise without full-time overhead.</p></div>
+      <div class="card"><div class="icon">◆</div><h3>Operations & Finance</h3><p>Back-office and finance leadership that scales with the business.</p></div>
+      <div class="card"><div class="icon">◆</div><h3>Consulting Advisory</h3><p>Org design and hiring-strategy support alongside every search.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>A search process built on fit, not just fill rate</h2>
+    </div>
+    <div class="process-row">
+      <div class="step"><span class="num">01</span><h3>Discovery</h3><p>We map the role, team, and success criteria before sourcing begins.</p></div>
+      <div class="step"><span class="num">02</span><h3>Targeted search</h3><p>Direct outreach to a curated pool, not a mass job-board post.</p></div>
+      <div class="step"><span class="num">03</span><h3>Vetted shortlist</h3><p>A short list of candidates who are pre-screened for fit and motivation.</p></div>
+      <div class="step"><span class="num">04</span><h3>Placement & follow-up</h3><p>Support through offer, onboarding, and the first 90 days.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial">
+  <blockquote>"ST Spencer found us a VP of Engineering in three weeks — someone our internal team had been searching for over four months."</blockquote>
+  <cite>— Head of Talent, Series B SaaS company</cite>
+</section>
+
+<section class="cta-banner">
+  <h2>Ready to make your next hire?</h2>
+  <p>Tell us about the role and we'll have a shortlist strategy back to you within 48 hours.</p>
+  <div class="hero-ctas">
+    <a href="#" class="btn-primary" style="background:var(--indigo); box-shadow:0 10px 24px rgba(75,46,158,0.25);">Start a Conversation</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark"></span>ST Spencer</div>
+        <p style="max-width:280px; font-size:0.9rem; color:#B9B5CC;">Fractal recruiting &amp; consulting — matching companies and candidates who fit.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Insights</a>
+        <a href="#">Contact</a>
+      </div>
+      <div>
+        <h4>Employers</h4>
+        <a href="#">Hire Talent</a>
+        <a href="#">Specializations</a>
+        <a href="#">Case Studies</a>
+      </div>
+      <div>
+        <h4>Candidates</h4>
+        <a href="#">Find Your Fit</a>
+        <a href="#">Open Roles</a>
+        <a href="#">Resources</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ST Spencer. All rights reserved.</span>
+      <span>Homepage mockup — draft for review</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
