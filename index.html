@@ -267,6 +267,11 @@
     display:none; margin-top:16px; color:var(--teal-deep); font-weight:600; font-size:0.9rem; text-align:center;
   }
   .form-success.visible{ display:block; }
+  .form-error{
+    display:none; margin-top:16px; color:#C0392B; font-weight:600; font-size:0.9rem; text-align:center;
+  }
+  .form-error.visible{ display:block; }
+  .contact-submit:disabled{ opacity:0.7; cursor:default; }
   @media (max-width:600px){ .form-row{ flex-direction:column; gap:0; } .contact-form{ padding:28px 24px; } }
 
   /* Footer */
@@ -455,8 +460,9 @@
           <input type="tel" id="cf-phone" name="phone" placeholder="(555) 123-4567" required>
         </div>
       </div>
-      <button type="submit" class="btn-blurple contact-submit">Start a Conversation</button>
+      <button type="submit" class="btn-blurple contact-submit" id="contact-submit-btn">Start a Conversation</button>
       <p class="form-success" id="form-success">Thanks — we'll be in touch within 48 hours.</p>
+      <p class="form-error" id="form-error">Something went wrong sending that — please try again, or reach out directly.</p>
     </form>
   </div>
 </section>
@@ -495,14 +501,71 @@
 </footer>
 
 <script>
-  var contactForm = document.getElementById('contact-form');
-  if (contactForm) {
+  (function(){
+    var HUBSPOT_PORTAL_ID = '2184655';
+    var HUBSPOT_FORM_GUID = 'b0d319ab-7069-4fdd-8625-cffb90351b6e';
+    var HUBSPOT_ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit/' + HUBSPOT_PORTAL_ID + '/' + HUBSPOT_FORM_GUID;
+
+    var contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
+
+    var submitBtn = document.getElementById('contact-submit-btn');
+    var successMsg = document.getElementById('form-success');
+    var errorMsg = document.getElementById('form-error');
+
+    function getCookie(name){
+      var match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
+      return match ? decodeURIComponent(match[2]) : undefined;
+    }
+
     contactForm.addEventListener('submit', function(e){
       e.preventDefault();
-      document.getElementById('form-success').classList.add('visible');
-      contactForm.reset();
+      successMsg.classList.remove('visible');
+      errorMsg.classList.remove('visible');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      var fields = [
+        { name: 'firstname', value: document.getElementById('cf-firstname').value },
+        { name: 'lastname', value: document.getElementById('cf-lastname').value },
+        { name: 'jobtitle', value: document.getElementById('cf-title').value },
+        { name: 'company', value: document.getElementById('cf-company').value },
+        { name: 'email', value: document.getElementById('cf-email').value },
+        { name: 'phone', value: document.getElementById('cf-phone').value }
+      ];
+
+      var payload = {
+        fields: fields,
+        context: {
+          pageUri: window.location.href,
+          pageName: document.title
+        }
+      };
+      var hutk = getCookie('hubspotutk');
+      if (hutk) { payload.context.hutk = hutk; }
+
+      fetch(HUBSPOT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function(response){
+          if (!response.ok) {
+            return response.json().then(function(data){ throw new Error(JSON.stringify(data)); });
+          }
+          successMsg.classList.add('visible');
+          contactForm.reset();
+        })
+        .catch(function(err){
+          console.error('HubSpot form submission failed:', err);
+          errorMsg.classList.add('visible');
+        })
+        .finally(function(){
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Start a Conversation';
+        });
     });
-  }
+  })();
 </script>
 </body>
 </html>
