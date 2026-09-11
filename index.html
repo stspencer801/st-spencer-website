@@ -236,6 +236,37 @@
   .cta-banner p{ color:var(--slate); font-size:1.05rem; margin-bottom:34px; }
   .cta-banner .hero-ctas{ justify-content:center; margin-bottom:0; }
 
+  /* Contact form */
+  .contact-wrap{ max-width:640px; margin:0 auto; }
+  .contact-form{
+    text-align:left; margin-top:8px;
+    background:var(--paper); border:1px solid var(--border); border-radius:24px;
+    padding:40px; box-shadow:0 20px 50px rgba(17,17,17,0.05);
+  }
+  .form-row{ display:flex; gap:16px; }
+  .form-row .form-field{ flex:1; }
+  .form-field{ margin-bottom:20px; }
+  .form-field.form-field-last{ margin-bottom:28px; }
+  .form-field label{
+    display:block; font-size:0.85rem; font-weight:600; color:var(--ink); margin-bottom:8px;
+  }
+  .form-field input, .form-field textarea{
+    width:100%; font-family:'Heebo', sans-serif; font-size:0.95rem; color:var(--ink);
+    padding:13px 16px; border:1.5px solid var(--border); border-radius:10px;
+    background:var(--cloud); transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .form-field input::placeholder, .form-field textarea::placeholder{ color:var(--slate-light); }
+  .form-field input:focus, .form-field textarea:focus{
+    outline:none; border-color:var(--grad-5); box-shadow:0 0 0 3px rgba(96,85,245,0.15); background:var(--paper);
+  }
+  .form-field textarea{ resize:vertical; min-height:100px; }
+  .contact-submit{ width:100%; border:none; cursor:pointer; display:block; text-align:center; }
+  .form-success{
+    display:none; margin-top:16px; color:var(--teal-deep); font-weight:600; font-size:0.9rem; text-align:center;
+  }
+  .form-success.visible{ display:block; }
+  @media (max-width:600px){ .form-row{ flex-direction:column; gap:0; } .contact-form{ padding:28px 24px; } }
+
   /* Footer */
   footer{ background:var(--ink-deep); color:var(--slate-light); padding:56px 32px 32px; }
   .footer-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px; margin-bottom:40px; }
@@ -387,11 +418,38 @@
   <cite>— Head of Talent, Series B SaaS company</cite>
 </section>
 
-<section class="cta-banner">
-  <h2>Ready to make your next hire?</h2>
-  <p>Tell us about the role and we'll have a shortlist strategy back to you within 48 hours.</p>
-  <div class="hero-ctas">
-    <a href="#" class="btn-primary">Start a Conversation</a>
+<section class="cta-banner" id="contact">
+  <div class="contact-wrap">
+    <h2>Ready to make your next hire?</h2>
+    <p>Tell us about the role and we'll have a shortlist strategy back to you within 48 hours.</p>
+    <form class="contact-form" id="contact-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-field">
+          <label for="cf-title">Title</label>
+          <input type="text" id="cf-title" name="title" placeholder="VP of Talent" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cf-company">Company</label>
+          <input type="text" id="cf-company" name="company" placeholder="Company name" required>
+        </div>
+        <div class="form-field">
+          <label for="cf-email">Email Address</label>
+          <input type="email" id="cf-email" name="email" placeholder="jane@company.com" required>
+        </div>
+      </div>
+      <div class="form-field form-field-last">
+        <label for="cf-phone">Phone Number</label>
+        <input type="tel" id="cf-phone" name="phone" placeholder="(555) 123-4567" required>
+      </div>
+      <button type="submit" class="btn-blurple contact-submit">Start a Conversation</button>
+      <p class="form-success" id="form-success">Thanks — we'll be in touch within 48 hours.</p>
+    </form>
   </div>
 </section>
 
@@ -428,5 +486,15 @@
   </div>
 </footer>
 
+<script>
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById('form-success').classList.add('visible');
+      contactForm.reset();
+    });
+  }
+</script>
 </body>
 </html>
