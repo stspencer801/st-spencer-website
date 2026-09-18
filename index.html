@@ -282,6 +282,104 @@
   .footer-grid a{ display:block; color:var(--slate-light); font-size:0.92rem; margin-bottom:10px; }
   .footer-bottom{ border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; display:flex; justify-content:space-between; font-size:0.85rem; flex-wrap:wrap; gap:12px; }
   @media (max-width:760px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+
+  /* ===== Case studies carousel ===== */
+  .cases{ background:var(--cloud); overflow:hidden; }
+  .cases .section-head{ margin-bottom:40px; }
+  .case-carousel{ position:relative; }
+  .case-track{
+    display:flex; gap:24px; overflow-x:auto;
+    scroll-snap-type:x mandatory; scroll-behavior:smooth;
+    padding:6px 2px 18px;
+    -ms-overflow-style:none; scrollbar-width:none;
+  }
+  .case-track::-webkit-scrollbar{ display:none; }
+  .case-card{
+    flex:0 0 calc((100% - 72px) / 4);
+    aspect-ratio:1 / 1; scroll-snap-align:start;
+    border:none; border-radius:20px; padding:24px; cursor:pointer;
+    color:#fff; text-align:left; position:relative; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:space-between;
+    box-shadow:0 14px 30px rgba(17,17,17,0.10);
+    transition:transform .18s ease, box-shadow .18s ease;
+    font-family:'Heebo', sans-serif;
+  }
+  .case-card:hover{ transform:translateY(-5px); box-shadow:0 22px 44px rgba(17,17,17,0.16); }
+  .case-card:focus-visible{ outline:3px solid var(--grad-5); outline-offset:3px; }
+  .case-card .cc-logo{
+    height:34px; width:auto; max-width:72%;
+    object-fit:contain; object-position:left center;
+    filter:brightness(0) invert(1); opacity:.96;
+  }
+  .case-card .cc-logo-text{ font-weight:800; font-size:1.05rem; }
+  .case-card .cc-title{
+    font-size:1.12rem; font-weight:700; line-height:1.22; margin:0;
+    text-shadow:0 1px 6px rgba(0,0,0,0.16);
+  }
+  .case-card .cc-cue{
+    position:absolute; top:20px; right:20px;
+    font-size:0.72rem; font-weight:700; letter-spacing:0.05em;
+    text-transform:uppercase; opacity:.85;
+  }
+  .cc-g1{ background:linear-gradient(135deg, var(--grad-1), var(--teal)); }
+  .cc-g2{ background:linear-gradient(135deg, var(--grad-2), var(--grad-4)); }
+  .cc-g3{ background:linear-gradient(135deg, var(--grad-4), var(--grad-5)); }
+  .cc-g4{ background:linear-gradient(135deg, var(--coral), var(--orange)); }
+  .case-nav{ display:flex; gap:12px; justify-content:flex-end; margin-top:10px; }
+  .case-nav button{
+    width:44px; height:44px; border-radius:50%;
+    border:1.5px solid var(--border); background:var(--paper);
+    cursor:pointer; font-size:1.25rem; color:var(--ink); line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .case-nav button:hover{ transform:translateY(-1px); border-color:var(--grad-5); }
+  @media (max-width:900px){ .case-card{ flex-basis:calc((100% - 48px) / 3); } }
+  @media (max-width:640px){ .case-card{ flex-basis:calc((100% - 24px) / 2); } .case-card .cc-title{ font-size:1rem; } }
+  @media (max-width:460px){ .case-card{ flex-basis:80%; } }
+
+  /* Case study modal */
+  .case-modal{
+    position:fixed; inset:0; z-index:200; padding:24px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(6,6,6,0.55);
+    opacity:0; visibility:hidden;
+    transition:opacity .22s ease, visibility .22s ease;
+  }
+  .case-modal.open{ opacity:1; visibility:visible; }
+  .case-modal-card{
+    background:var(--paper); color:var(--ink);
+    width:min(680px, 100%); max-height:88vh; overflow-y:auto;
+    border-radius:22px; padding:40px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.35);
+    transform:perspective(1400px) rotateY(-12deg) scale(.92); opacity:0;
+    transition:transform .3s cubic-bezier(.2,.7,.3,1), opacity .3s ease;
+  }
+  .case-modal.open .case-modal-card{ transform:perspective(1400px) rotateY(0) scale(1); opacity:1; }
+  .cm-top{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:20px; }
+  .cm-logo{ height:40px; width:auto; max-width:210px; object-fit:contain; object-position:left center; }
+  .cm-close{
+    flex-shrink:0; width:40px; height:40px; border-radius:50%;
+    border:1.5px solid var(--border); background:var(--cloud); cursor:pointer;
+    font-size:1.3rem; line-height:1; color:var(--slate);
+  }
+  .cm-close:hover{ color:var(--ink); }
+  .cm-title{ font-size:1.65rem; font-weight:700; line-height:1.2; margin-bottom:6px; }
+  .cm-meta{ font-size:0.9rem; color:var(--slate); font-weight:600; margin-bottom:22px; }
+  .cm-body p{ color:var(--charcoal); font-size:1rem; margin-bottom:16px; }
+  .cm-win{
+    margin-top:8px; padding:18px 20px; border-radius:14px;
+    background:var(--mint-white); border:1px solid var(--mint);
+    font-size:0.98rem; color:var(--ink-deep);
+  }
+  .cm-win strong{ color:var(--teal-deep); }
+  @media (max-width:600px){ .case-modal-card{ padding:28px 22px; } .cm-title{ font-size:1.4rem; } }
+  @media (prefers-reduced-motion: reduce){
+    .case-track{ scroll-behavior:auto; }
+    .case-modal-card{ transition:opacity .2s ease; transform:none; }
+    .case-modal.open .case-modal-card{ transform:none; }
+  }
+
 </style>
 </head>
 <body>
@@ -420,6 +518,215 @@
     </div>
   </div>
 </section>
+
+<section class="section cases" id="case-studies">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Case studies</span>
+      <h2>Growth stories, told at company scale</h2>
+      <p>Real engagements from decades of search. Tap any story to see how the team behind the growth came together.</p>
+    </div>
+    <div class="case-carousel">
+      <div class="case-track" id="caseTrack" role="list"></div>
+      <div class="case-nav">
+        <button type="button" id="casePrev" aria-label="Previous case studies">&#8249;</button>
+        <button type="button" id="caseNext" aria-label="Next case studies">&#8250;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="case-modal" id="caseModal" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
+  <div class="case-modal-card">
+    <div class="cm-top">
+      <img class="cm-logo" id="cmLogo" src="" alt="">
+      <button type="button" class="cm-close" id="cmClose" aria-label="Close">&times;</button>
+    </div>
+    <h3 class="cm-title" id="cmTitle"></h3>
+    <div class="cm-meta" id="cmMeta"></div>
+    <div class="cm-body" id="cmBody"></div>
+    <div class="cm-win" id="cmWin"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function init(){
+    var track = document.getElementById("caseTrack");
+    var modal = document.getElementById("caseModal");
+    if(!track || !modal) return;
+
+    var CASES = [
+      { c:"DeepSee",
+        title:"From Stealth Mode to the Banks' Secret Weapon",
+        meta:"DeepSee · $7.9M Series A · emerged from stealth, February 2020",
+        paras:[
+          `When DeepSee stepped out of stealth in early 2020, it had $7.9M in the bank, an audacious idea, and almost no one to build it. The idea: machine learning that could mine the world's most complex financial instruments for the largest banks on earth, turning raw data into knowledge. The problem: a Series A company has to become real before the runway runs out — and it was starting from nearly zero.`,
+          `DeepSee made ST Spencer its only recruiter. Working shoulder to shoulder with the CEO, CTO, and VPs of Engineering and Product, ST Spencer stood up the founding technical bench — engineering, data science, UX, cloud, and product — across Utah and California, and wrote the hiring and interview playbook the company would run on going forward.`
+        ],
+        win:`In five months, a just-out-of-stealth startup became a staffed, ship-ready company building data infrastructure for the world's largest banks.` },
+
+      { c:"Bright Machines",
+        title:"Staffing the Robots That Reinvented the Factory",
+        meta:`Bright Machines · $179M Series A · a Business Insider "Top 44 startups to bet your career on," 2019`,
+        paras:[
+          `Bright Machines raised a staggering $179M Series A to do something the industry called a moonshot: teach factories to run themselves by fusing flexible robotics, computer vision, and AI into a software-defined manufacturing platform. Business Insider named it one of the top 44 startups to bet your career on. But a moonshot needs builders, and the company was scaling across two continents at once.`,
+          `As the first recruiter on the ground in North America, ST Spencer partnered with key executives from San Francisco to Israel to build the team behind the platform — landing hires in the disciplines that are hardest to fill: mechanical engineering, machine learning, computer vision, data science, software engineering, and go-to-market.`
+        ],
+        win:`ST Spencer built out the North American team of one of 2019's most-watched startups — from its very first recruiter up.` },
+
+      { c:"BeyondTrust",
+        title:"Defending Half the Fortune 100, Across Five Countries",
+        meta:"BeyondTrust · Gartner Magic Quadrant & Forrester Wave leader · 4,000 customers worldwide",
+        paras:[
+          `BeyondTrust wasn't a startup with something to prove. It was a recognized leader — a Gartner Magic Quadrant and Forrester Wave name in cybersecurity — protecting 4,000 customers that included more than half of the Fortune 100. At that scale, hiring isn't about filling seats; it's about defending a market position across continents without missing a beat.`,
+          `ST Spencer recruited across the whole business — engineering, enterprise sales, sales engineering, account management, technical support, and professional services — placing people in five countries, from North America to the UK, Singapore, and the UAE, right up until BeyondTrust was acquired by Gemalto.`
+        ],
+        win:`ST Spencer scaled the global team of a recognized cybersecurity leader across five countries — straight through to acquisition.` },
+
+      { c:"Anonyome Labs",
+        title:"From Two Founders to Eighty",
+        meta:"Anonyome Labs · $32.4M Series B · consumer privacy & identity platform",
+        paras:[
+          `Anonyome Labs began the way most great companies do: a handful of founders, a big idea about giving people control over their privacy and identity, and no team to build it. ST Spencer had a running start — it had already worked with that founding and executive team at Solera Networks — so the trust was there on day one.`,
+          `Since 2014, ST Spencer has been the partner Anonyome calls whenever it needs to grow. That has meant building regional recruitment strategies and brand evangelism across Utah, California, and Australia, and hiring across the company: iOS and web engineers, QA, DevOps, systems engineers, growth marketers, and designers.`
+        ],
+        win:`A decade-long partnership that helped grow Anonyome from a stealth-stage startup into a company of more than 80 employees.` },
+
+      { c:"Vidado",
+        title:"Staffing an AI Pioneer, Across the Whole Org Chart",
+        meta:"Vidado · $51.9M Series C · AI platform for unstructured data",
+        paras:[
+          `By its Series C, Vidado had raised $51.9M on a single promise: an AI platform that turns raw, highly unstructured data into discoverable, usable information, using machine learning and computer vision. Twice over two years, whenever Vidado needed to grow, it came back to ST Spencer — the surest sign a recruiting partnership is working.`,
+          `Working directly with the CEO, CTO, and Head of Machine Learning, ST Spencer filled roles spanning the entire org chart — engineering, DevOps, security, machine learning, data science, and QA — across Northern California.`
+        ],
+        win:`Nineteen hires across the full org chart of a $51.9M-funded AI company, over a two-year, two-engagement partnership.` },
+
+      { c:"Parsable",
+        title:"Building the Marketing Engine Behind Industry 4.0",
+        meta:"Parsable · $132.9M Series D · backed by Google Ventures, a16z, Kleiner Perkins & Lightspeed",
+        paras:[
+          `By its Series D, Parsable had raised $132.9M from the most recognizable names in venture — Google Ventures, Andreessen Horowitz, Kleiner Perkins, and Lightspeed — to bring the connected worker into Industry 4.0. Funding at that level comes with a mandate: build the go-to-market engine, and build it fast.`,
+          `Embedded alongside Parsable's CMO as part of a three-person recruiting team, ST Spencer helped stand up the marketing organization — demand generation, product management, PR, content, events, and business development — across San Francisco and Vancouver.`
+        ],
+        win:`ST Spencer helped build the marketing org of a $132.9M-funded Industry 4.0 leader backed by the top names in venture capital.` },
+
+      { c:"Infoblox",
+        title:"The Flagship Team Behind a $1.6 Billion Exit",
+        meta:"Infoblox · later acquired by Vista Equity Partners for $1.6B · 50% market share, 9,000 customers",
+        paras:[
+          `Infoblox owned its category — 50% market share, 9,000 customers, and 300 of the Fortune 500 — and it was betting its future on a flagship next-generation cloud platform. To build it, the company assembled a global talent-acquisition team of 35-plus, and brought ST Spencer on specifically for that flagship effort.`,
+          `Partnering with senior executives across Northern California, Seattle, and Canada, ST Spencer recruited the builders behind the bet — DevOps, cloud and software engineering, product management, technical account management, and technical support.`
+        ],
+        win:`ST Spencer helped staff the flagship cloud project at Infoblox — a company later acquired by Vista Equity Partners for $1.6 billion.` },
+
+      { c:"Google Fiber",
+        title:"How Utah Got Google Fiber",
+        meta:"Google Fiber · Google's second Fiber market in North America",
+        paras:[
+          `When Google chose Utah as only its second Google Fiber market in North America, it faced a rare challenge: open an entire market from scratch. To do it, Google needed one recruiter on the ground who could build a workforce out of nothing — and that recruiter was ST Spencer, the sole Google Fiber recruiter in the state.`,
+          `Partnering with Google's national and regional leaders, ST Spencer owned the pipeline end to end — developing regional sourcing strategies, screening and evaluating 147 targeted candidates out of a pool of 600, and placing people in field sales, marketing, events, and operations to launch the market.`
+        ],
+        win:`ST Spencer opened an entire new market for Google — staffing 24 critical positions that put Google Fiber on the ground in Utah.` },
+
+      { c:"eFileCabinet",
+        title:"An Entire Revenue Organization, Built From Scratch",
+        meta:"eFileCabinet · $26M Series B · SaaS document management",
+        paras:[
+          `eFileCabinet had product-market fit and $26M in Series B funding. What it didn't have was a revenue engine. The CEO, CFO, and CMO wanted to build and scale an entire commercial organization from the ground up — and they handed the job to a recruiting team of one.`,
+          `Over nine months, ST Spencer target-sourced, pipelined, interviewed, and placed people across the org chart — standing up the sales leadership, inside sales, BDR, and account-representative teams and managing the whole process end to end.`
+        ],
+        win:`ST Spencer built an entire go-to-market organization for eFileCabinet — 25 hires across the org chart — as a team of one.` },
+
+      { c:"RiskIQ",
+        title:"Doubling a Cybersecurity Leader in Two Years",
+        meta:"RiskIQ · $80.5M Series D · world leader in attack surface management",
+        paras:[
+          `RiskIQ was the world leader in attack surface management and external threat protection — $80.5M deep into Series D and growing fast enough that a six-month contract turned into a 23-month partnership. When a company scales that hard, its recruiter stops being a vendor and becomes part of the growth story.`,
+          `ST Spencer built out the customer success team across San Francisco and Kansas City, ran engineering hiring alongside the founders and CTO, and staffed enterprise sales, SDR, inside sales, and sales engineering nationally and globally.`
+        ],
+        win:`Over the course of ST Spencer's engagement, RiskIQ grew from 65 to 130 employees — the company doubled in size.` },
+
+      { c:"Solera",
+        title:"60 to 135, at 93% Retention",
+        meta:"Solera Networks · $51.7M Series D · later acquired (Blue Coat → Symantec → Broadcom)",
+        paras:[
+          `Solera Networks was scaling hard in network forensics and security, and it made ST Spencer its first and only recruiter — the person responsible for building the entire talent-acquisition function from nothing. This is the story where the numbers do the talking.`,
+          `Partnering with the VPs of HR and Finance, ST Spencer recruited across four global regions — North America, EMEA, ASEAN, and ANZ — rebuilt the hiring process end to end for scale, increased the candidate pipeline by 400%, and drove down both cost and time per hire, right up until the company was acquired by Blue Coat.`
+        ],
+        win:`ST Spencer grew Solera from 60 to 135 employees while holding a 93% retention rate — capped by a successful acquisition that ultimately rolled into Symantec and Broadcom.` }
+    ];
+
+    var grads = ["cc-g1","cc-g2","cc-g3","cc-g4"];
+
+    // Reuse the logos already embedded in the client marquee (no duplication).
+    var logoMap = {};
+    document.querySelectorAll(".logo-chip img").forEach(function(img){
+      var a = img.getAttribute("alt");
+      if(a && !logoMap[a]) logoMap[a] = img.getAttribute("src");
+    });
+
+    CASES.forEach(function(cs, i){
+      var src = logoMap[cs.c] || "";
+      var card = document.createElement("button");
+      card.type = "button";
+      card.className = "case-card " + grads[i % grads.length];
+      card.setAttribute("role", "listitem");
+      card.setAttribute("aria-label", cs.c + " case study: " + cs.title);
+      card.innerHTML =
+        (src ? '<img class="cc-logo" src="' + src + '" alt="' + cs.c + ' logo">'
+             : '<span class="cc-logo-text">' + cs.c + '</span>') +
+        '<h3 class="cc-title">' + cs.title + '</h3>' +
+        '<span class="cc-cue">Read story &#8594;</span>';
+      card.addEventListener("click", function(){ openCase(i); });
+      track.appendChild(card);
+    });
+
+    var cmLogo  = document.getElementById("cmLogo");
+    var cmTitle = document.getElementById("cmTitle");
+    var cmMeta  = document.getElementById("cmMeta");
+    var cmBody  = document.getElementById("cmBody");
+    var cmWin   = document.getElementById("cmWin");
+
+    function openCase(i){
+      var cs = CASES[i];
+      var src = logoMap[cs.c] || "";
+      if(src){ cmLogo.src = src; cmLogo.alt = cs.c + " logo"; cmLogo.style.display = ""; }
+      else { cmLogo.removeAttribute("src"); cmLogo.style.display = "none"; }
+      cmTitle.textContent = cs.title;
+      cmMeta.textContent  = cs.meta;
+      cmBody.innerHTML = cs.paras.map(function(p){ return "<p>" + p + "</p>"; }).join("");
+      cmWin.innerHTML  = "<strong>The win:</strong> " + cs.win;
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeCase(){
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    document.getElementById("cmClose").addEventListener("click", closeCase);
+    modal.addEventListener("click", function(e){ if(e.target === modal) closeCase(); });
+    document.addEventListener("keydown", function(e){ if(e.key === "Escape" && modal.classList.contains("open")) closeCase(); });
+
+    function page(dir){
+      var amount = track.clientWidth * 0.9;
+      if(dir > 0 && track.scrollLeft + track.clientWidth >= track.scrollWidth - 4){
+        track.scrollTo({ left: 0, behavior: "smooth" });
+      } else if(dir < 0 && track.scrollLeft <= 4){
+        track.scrollTo({ left: track.scrollWidth, behavior: "smooth" });
+      } else {
+        track.scrollBy({ left: dir * amount, behavior: "smooth" });
+      }
+    }
+    document.getElementById("casePrev").addEventListener("click", function(){ page(-1); });
+    document.getElementById("caseNext").addEventListener("click", function(){ page(1); });
+  }
+
+  if(document.readyState === "loading"){ document.addEventListener("DOMContentLoaded", init); }
+  else { init(); }
+})();
+</script>
+
 
 <section class="testimonial">
   <blockquote>"ST Spencer found us a VP of Engineering in three weeks — someone our internal team had been searching for over four months."</blockquote>
