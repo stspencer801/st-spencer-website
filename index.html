@@ -319,6 +319,8 @@
     scroll-snap-type:x mandatory; scroll-behavior:smooth;
     padding:6px 2px 18px;
     -ms-overflow-style:none; scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(90deg, #000 80%, transparent 100%);
+    mask-image:linear-gradient(90deg, #000 80%, transparent 100%);
   }
   .case-track::-webkit-scrollbar{ display:none; }
   .case-card{
@@ -413,6 +415,7 @@
   @media (max-width:460px){ .process-row{ grid-template-columns:1fr; } }
   @media (max-width:640px){
     .wrap{ padding:0 22px; }
+    .logo-strip .wrap{ padding-left:22px; text-align:center; }
     .hero{ padding:64px 22px 78px; }
     .hero .eyebrow{ margin-bottom:18px; font-size:0.78rem; letter-spacing:0.14em; }
     .hero h1{ font-size:2.45rem; margin-bottom:18px; }
