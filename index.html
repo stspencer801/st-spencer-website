@@ -74,7 +74,34 @@
     transition:transform .15s ease;
   }
   .cta-btn:hover{ transform:translateY(-1px); }
-  @media (max-width:860px){ .nav-links{ display:none; } }
+  /* Mobile navigation */
+  .nav-toggle{
+    display:none; width:44px; height:44px; padding:0;
+    border:none; background:transparent; cursor:pointer;
+    flex-direction:column; justify-content:center; align-items:center; gap:5px;
+  }
+  .nav-toggle span{ display:block; width:24px; height:2px; background:var(--ink); border-radius:2px; transition:transform .22s ease, opacity .2s ease; }
+  nav.open .nav-toggle span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  nav.open .nav-toggle span:nth-child(2){ opacity:0; }
+  nav.open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  @media (max-width:860px){
+    nav{ padding:12px 20px; }
+    .nav-toggle{ display:flex; }
+    nav .brand{ margin-right:auto; }
+    header.site .brand .mark{ width:54px; height:54px; }
+    .cta-btn{ padding:9px 15px; font-size:0.85rem; box-shadow:0 4px 12px rgba(71,185,241,0.28); }
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0;
+      flex-direction:column; gap:0;
+      background:var(--paper); border-bottom:1px solid var(--border);
+      box-shadow:0 14px 26px rgba(0,0,0,0.07);
+      max-height:0; overflow:hidden; opacity:0; visibility:hidden;
+      transition:max-height .3s ease, opacity .2s ease, visibility .2s ease;
+    }
+    nav.open .nav-links{ max-height:360px; opacity:1; visibility:visible; }
+    .nav-links a{ padding:15px 20px; border-top:1px solid var(--border); font-size:1rem; color:var(--ink); }
+    .nav-links a:first-child{ border-top:none; }
+  }
 
   /* Hero */
   .hero{
@@ -165,7 +192,7 @@
   .stats .wrap{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
   .stat{
     background:linear-gradient(160deg, var(--grad-5) 0%, var(--grad-4) 40%, var(--grad-2) 75%, var(--grad-1) 100%);
-    border-radius:24px; padding:36px 28px; text-align:left;
+    border-radius:24px; padding:36px 28px; text-align:left; min-width:0;
     box-shadow:0 16px 32px rgba(29,78,216,0.30);
   }
   .stat h3{
@@ -380,6 +407,36 @@
     .case-modal.open .case-modal-card{ transform:none; }
   }
 
+
+  /* ===== Mobile optimization ===== */
+  @media (max-width:760px){ .process-row{ grid-template-columns:1fr 1fr; row-gap:34px; } }
+  @media (max-width:460px){ .process-row{ grid-template-columns:1fr; } }
+  @media (max-width:640px){
+    .wrap{ padding:0 22px; }
+    .hero{ padding:64px 22px 78px; }
+    .hero .eyebrow{ margin-bottom:18px; font-size:0.78rem; letter-spacing:0.14em; }
+    .hero h1{ font-size:2.45rem; margin-bottom:18px; }
+    .hero p.lead{ font-size:1.02rem; margin-bottom:30px; }
+    .hero-ctas{ gap:12px; margin-bottom:40px; }
+    .btn-primary, .btn-blurple, .btn-secondary{ padding:14px 22px; font-size:0.95rem; }
+    .stats{ padding:52px 20px; }
+    .stats .wrap{ gap:16px; padding:0; }
+    .stat{ padding:24px 20px; border-radius:20px; }
+    .stat h3{ font-size:2.1rem; margin-bottom:8px; }
+    .stat p{ font-size:0.92rem; }
+    .section{ padding:58px 22px; }
+    .section-head{ margin-bottom:34px; }
+    .section-head h2{ font-size:1.68rem; }
+    .section-head p{ font-size:1rem; }
+    .card{ padding:26px; }
+    .step .num{ font-size:1.4rem; }
+    .testimonial{ padding:60px 24px; }
+    .testimonial blockquote{ font-size:1.3rem; }
+    .cta-banner{ padding:60px 22px; }
+    .cta-banner h2{ font-size:1.75rem; }
+    .cta-banner p{ font-size:1rem; }
+    footer{ padding:46px 22px 28px; }
+  }
 </style>
 </head>
 <body>
@@ -387,7 +444,7 @@
 <header class="site">
   <nav>
     <a href="#" class="brand" aria-label="ST Spencer — back to top"><span class="mark"></span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="primaryNav">
       <a href="#">ST Spencer</a>
       <a href="#">Clients</a>
       <a href="#services">Services</a>
@@ -395,6 +452,7 @@
       <a href="#">About</a>
     </div>
     <button class="cta-btn">Start a Search</button>
+    <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primaryNav"><span></span><span></span><span></span></button>
   </nav>
 </header>
 
@@ -874,6 +932,20 @@
         });
     });
   })();
+</script>
+<script>
+(function(){
+  var nav = document.querySelector('header.site nav');
+  var toggle = nav && nav.querySelector('.nav-toggle');
+  if(!nav || !toggle) return;
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('.nav-links a').forEach(function(a){
+    a.addEventListener('click', function(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+  });
+})();
 </script>
 </body>
 </html>
