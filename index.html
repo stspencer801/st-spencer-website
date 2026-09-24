@@ -30,6 +30,7 @@
     --paper:#FFFFFF;
     --orange:#E8601A;
     --blue:#1E9FE6;
+    --search-blue:#47B9F1;
     --coral:#FF6B5B;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -93,7 +94,7 @@
   .hero-inner{ position:relative; max-width:1160px; margin:0 auto; }
   .eyebrow{
     display:inline-block;
-    color:var(--ink); font-weight:700; font-size:0.85rem;
+    color:var(--ink); font-weight:700; font-size:1.1475rem;
     text-transform:uppercase; letter-spacing:0.18em;
     margin-bottom:26px;
   }
@@ -106,7 +107,7 @@
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
   .hero h1 .grad-ondemand{
-    color:#BEBEBE;
+    color:#A0A0A0;
   }
   .hero p.lead{
     font-size:1.15rem; color:var(--slate); max-width:520px; margin-bottom:38px; font-weight:400;
@@ -123,8 +124,9 @@
   .btn-secondary{
     background:var(--paper); color:var(--ink); font-weight:600; padding:15px 28px;
     border-radius:10px; font-size:1rem; border:1.5px solid var(--border);
+    box-shadow:0 8px 18px rgba(17,17,17,0.10);
   }
-  .hero-note{ font-size:0.85rem; color:var(--slate-light); }
+  .hero-note{ font-size:0.85rem; color:#5C5C5C; }
 
   /* Logo strip */
   .logo-strip{ background:var(--paper); padding:34px 0; border-bottom:1px solid var(--border); overflow:hidden; }
@@ -160,19 +162,21 @@
   @media (prefers-reduced-motion: reduce){ .logo-track{ animation:none; } }
 
   /* Stats */
-  .stats{ background:var(--cloud); padding:96px 32px; }
-  .stats .wrap{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .stats{ background:var(--paper); padding:80px 32px; }
+  .stats .wrap{ display:flex; justify-content:center; align-items:stretch; gap:48px; flex-wrap:wrap; }
   .stat{
-    background:linear-gradient(160deg, var(--grad-5) 0%, var(--grad-4) 40%, var(--grad-2) 75%, var(--grad-1) 100%);
-    border-radius:24px; padding:36px 28px; text-align:left;
-    box-shadow:0 16px 32px rgba(29,78,216,0.30);
+    display:flex; align-items:center; gap:18px; text-align:left;
+    background:#6055F5; border-radius:16px; padding:28px 32px;
+    box-shadow:0 10px 24px rgba(96,85,245,0.35);
   }
+  .stat-label{ font-size:1rem; font-weight:500; color:#fff; line-height:1.3; }
   .stat h3{
-    font-size:2.9rem; font-weight:700; margin-bottom:10px; color:#fff;
-    text-shadow:0 2px 10px rgba(0,0,0,0.12);
+    font-size:2.75rem; font-weight:700; margin:0; color:#fff; line-height:1; white-space:nowrap;
   }
-  .stat p{ color:rgba(255,255,255,0.92); font-size:1rem; font-weight:600; }
-  @media (max-width:760px){ .stats .wrap{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:760px){
+    .stats .wrap{ flex-direction:column; align-items:stretch; gap:20px; }
+    .stat h3{ font-size:2.2rem; }
+  }
 
   /* Section heading */
   .section{ padding:96px 32px; }
@@ -302,19 +306,19 @@
 <section class="hero">
   <div class="hero-inner">
     <span class="eyebrow">Hit your hiring goals, fast.</span>
-    <h1>Fractional Talent Partner =<br><span class="grad-results">Results</span> <span class="grad-ondemand">On-Demand</span></h1>
-    <p class="lead">ST Spencer pairs deep search expertise with a sharper process — matching companies and candidates who actually fit, faster than a traditional search firm.</p>
+    <h1>Fractional Talent Expert =<br><span class="grad-results">Faster</span> <span class="grad-ondemand">Recruiting Results</span></h1>
+    <p class="lead">ST Spencer helps growth-stage companies hit hiring goals, fast. With 20+ years partnering with founders and <span style="white-space:nowrap;">C-suite</span> leaders, we execute performance-driven recruiting strategies.</p>
     <div class="hero-ctas">
       <a href="#" class="btn-blurple">Let's Talk</a>
       <a href="#" class="btn-secondary">Find Your Fit</a>
     </div>
-    <div class="hero-note">Trusted by growth-stage companies and specialist teams nationwide</div>
+    <div class="hero-note">Trusted nationwide — from early-stage startups to VC- and PE-backed growth companies.</div>
   </div>
 </section>
 
 <div class="logo-strip">
   <div class="wrap">
-    <span class="label">We help great companies build amazing teams</span>
+    <span class="label">We help great companies build amazing teams (Some Recent Projects)</span>
   </div>
   <div class="logo-marquee">
     <div class="logo-track">
@@ -380,10 +384,9 @@
 
 <section class="stats">
   <div class="wrap">
-    <div class="stat"><h3>240+</h3><p>Placements made</p></div>
-    <div class="stat"><h3>18 days</h3><p>Average time-to-fill</p></div>
-    <div class="stat"><h3>92%</h3><p>12-month retention rate</p></div>
-    <div class="stat"><h3>35+</h3><p>Industries served</p></div>
+    <div class="stat"><p class="stat-label">Years of<br>Experience</p><h3>20+</h3></div>
+    <div class="stat"><p class="stat-label">Average<br>Time-to-fill</p><h3>36 days</h3></div>
+    <div class="stat"><p class="stat-label">Positions<br>Filled</p><h3>900+</h3></div>
   </div>
 </section>
 
