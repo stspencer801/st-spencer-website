@@ -91,6 +91,13 @@
     background:linear-gradient(90deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.12) 30%, rgba(255,255,255,0) 55%);
     pointer-events:none;
   }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, transparent 55%, rgba(30,16,110,0.16) 100%);
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
   .hero-inner{ position:relative; max-width:1160px; margin:0 auto; }
   .eyebrow{
     display:inline-block;
