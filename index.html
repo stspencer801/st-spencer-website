@@ -736,6 +736,15 @@
     if(!track || !modal) return;
 
     var CASES = [
+      { c:"SavvyMoney",
+        title:"30 to 150: Building the Plane While Flying It",
+        meta:"SavvyMoney · fintech since 2011 · credit-score & offer engine for banks and credit unions",
+        paras:[
+          `SavvyMoney had spent its first decade growing the hard way: organically. Its web and mobile credit-score and offer engine technology helped banks and credit unions drive revenue and keep customers from walking away, but the company itself was 30 people, mostly in the Bay Area, plus 12 engineers in Eastern Europe — and no one whose job was hiring. The assignment: build the recruiting function from scratch and double the company size in twelve months. In other words, build the plane while flying it.`,
+          `As a team of one, I wrote the entire talent-acquisition playbook, implemented the RecOps stack — Ashby, BambooHR, LinkedIn Recruiter, HubSpot, RocketReach, and Claude — developed and facilitated company-wide training to support the talent-acquisition playbook, and filled roles across the org chart at the same time. Over four years, the U.S. team grew from 30 to 150, and the engineering team in Eastern Europe from 12 to 115, across 18 countries. A 2025 acquisition added 20 people in India, a team that has since grown to 45.`
+        ],
+        win:`I grew SavvyMoney from 30 U.S. employees to 150 as a team of one — and the company is now one of the Bay Area's 100 fastest-growing, a top-20 place to work since 2023, and on Fortune's fastest-5,000 list.` },
+
       { c:"DeepSee",
         title:"From Stealth Mode to the Banks' Secret Weapon",
         meta:"DeepSee · $7.9M Series A · emerged from stealth, February 2020",
@@ -860,7 +869,8 @@
       var card = document.createElement("button");
       card.type = "button";
       card.className = "case-card";
-      card.style.setProperty("--cc", caseColor(i, CASES.length));
+      /* First card (SavvyMoney) is Orchid Purple; the rest sweep the "Faster" gradient */
+      card.style.setProperty("--cc", i === 0 ? "#B04ED9" : caseColor(i - 1, CASES.length - 1));
       card.setAttribute("role", "listitem");
       card.setAttribute("aria-label", cs.c + " case study: " + cs.title);
       card.innerHTML =
